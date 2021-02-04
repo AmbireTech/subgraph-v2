@@ -1,0 +1,16 @@
+{
+  "name": "adex-subgraph",
+  "license": "MIT",
+  "scripts": {
+    "codegen": "npx graph codegen",
+    "build": "npx graph build",
+    "deploy": "npx graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ adexnetwork/adex-protocol-v2",
+    "create-local": "npx graph create --node http://localhost:8020/ adexnetwork/adex-protocol1",
+    "remove-local": "npx graph remove --node http://localhost:8020/ adexnetwork/adex-protocol",
+    "deploy-local": "npx graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 adexnetwork/adex-protocol1"
+  },
+  "dependencies": {
+    "@graphprotocol/graph-cli": "0.19.0",
+    "@graphprotocol/graph-ts": "0.19.0"
+  }
+}

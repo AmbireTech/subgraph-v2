@@ -1,0 +1,109 @@
+interface ChannelTransaction {
+  id: ID!
+  timestamp: Int!
+}
+
+type Channel implements ChannelTransaction  @entity {
+  """ channel id """
+  id: ID!
+  creator: Bytes!
+  """ channel id """
+  channelId: Bytes!
+  tokenAddr: Bytes!
+  tokenAmount: BigInt!
+  validUntil: BigInt!
+  validators: [Bytes!]!
+  spec: String!
+  timestamp: Int!
+  channelWithdraw: [ChannelWithdraw!] @derivedFrom(field: "channel")
+  ChannelWithdrawExpired: [ChannelWithdrawExpired!] @derivedFrom(field: "channel")
+}
+
+type ChannelWithdrawExpired implements ChannelTransaction @entity {
+  """ transaction hash + ':' + channeLid + ':' + logIndex """
+  id: ID!
+  channel: Channel!
+  user: Bytes!
+  amount: BigInt!
+  timestamp: Int!
+}
+
+type ChannelWithdraw implements ChannelTransaction @entity {
+  """ transaction hash + ':' + user + ':' + logIndex """
+  id: ID!
+  user: Bytes!
+  channel: Channel!
+  amount: BigInt!
+  timestamp: Int!
+}
+
+interface StakingTransaction {
+  """ ID transaction hash """
+  id: ID!
+  owner: Bytes!
+  bondId: Bytes!
+  timestamp: Int!
+}
+
+type Bond implements StakingTransaction @entity {
+  """ ID transaction hash """
+  id: ID!
+  bondId: Bytes!
+  owner: Bytes!
+  amount: BigInt!
+  poolId: Bytes!
+  nonce: BigInt!
+  slashedAtStart: BigInt!
+  timestamp: Int!
+}
+
+type UnbondRequest implements StakingTransaction @entity {
+  """ ID transaction hash """
+  id: ID!
+  owner: Bytes!
+  bondId: Bytes!
+  willUnlock: BigInt!
+  timestamp: Int!
+}
+
+type Unbond implements StakingTransaction @entity {
+  """ ID transaction hash """
+  id: ID!
+  owner: Bytes!
+  bondId: Bytes!
+  timestamp: Int!
+}
+
+type Slash @entity {
+  """ ID transaction hash """
+  id: ID!
+  poolId: Bytes!
+  newSlashPts: BigInt!
+  timestamp: Int!
+}
+
+type Identity @entity {
+  """ id """
+  id: ID!
+  timestamp: Int!
+}
+
+type IdentityPrivilege @entity {
+  """ id + address """
+  id: ID!
+  identity: Bytes!
+  address: Bytes!
+  level: Int!
+  timestamp: Int!
+  lastUpdateTimestamp: Int!
+}
+
+type IdentityRoutine @entity {
+  """ id + hash """
+  id: ID!
+  identity: Bytes!
+  hash: Bytes!
+  authorized: Boolean!
+  timestamp: Int!
+  lastUpdateTimestamp: Int!
+}
