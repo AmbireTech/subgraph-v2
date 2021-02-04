@@ -1,4 +1,4 @@
-# AdEx Protocol Subgraph
+# AdEx Protocol Subgraph v2
 
 Subgraph for AdEx Network
 
