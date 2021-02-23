@@ -18,7 +18,7 @@ function encode(hexString: string): string {
 }
 
 export function handleLogBond(event: LogBond): void {
-  let contractAddressEncoded = encode('0x46ad2d37ceaee1e82b70b867e674b903a4b4ca32');
+  let contractAddressEncoded = encode(event.address.toHexString());
   let senderEncoded = encode(event.params.owner.toHexString());
   let amountEncoded = encode(event.params.amount.toHexString());
   let poolIdEncoded = encode(event.params.poolId.toHexString());
